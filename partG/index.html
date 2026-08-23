@@ -1,0 +1,45 @@
+<input type="text" id="searchInput" placeholder="Search students...">
+<select id="yearFilter">
+    <option value="all">All Years</option>
+    <option value="1">Year 1</option>
+    <option value="2">Year 2</option>
+    <option value="3">Year 3</option>
+    <option value="4">Year 4</option>
+</select>
+<div id="studentList"></div>
+
+<script>
+const students = [
+    { name: "Alice Tan", program: "Cybersecurity Engineering", year: 2 },
+    { name: "Bob Chen", program: "Computer Engineering", year: 1 },
+    { name: "Charlie", program: "Cybersecurity Engineering", year: 2 }
+];
+
+const searchInput = document.querySelector("#searchInput");
+const yearFilter = document.querySelector("#yearFilter");
+
+function filterAndRender() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedYear = yearFilter.value;
+
+    const filtered = students.filter(student => {
+        const matchesSearch = student.name.toLowerCase().includes(searchTerm);
+        const matchesYear = selectedYear === "all" || student.year.toString() === selectedYear;
+        return matchesSearch && matchesYear;
+    });
+
+    const container = document.querySelector("#studentList");
+    container.innerHTML = filtered.map(s => `
+        <div class="card">
+            <h3>${s.name}</h3>
+            <p>${s.program}</p>
+            <p>Year ${s.year}</p>
+        </div>
+    `).join("");
+}
+
+searchInput.addEventListener("input", filterAndRender);
+yearFilter.addEventListener("change", filterAndRender);
+
+filterAndRender();
+</script>

@@ -1,0 +1,4 @@
+[
+    { "id": 1, "title": "Web Technology", "department": "IT", "level": "200" },
+    { "id": 2, "title": "Data Structures", "department": "CS", "level": "100" }
+]
